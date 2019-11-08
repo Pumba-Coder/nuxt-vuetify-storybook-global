@@ -1,5 +1,6 @@
 // import centered from '@storybook/addon-centered/vue'
 // // import { INITIAL_VIEWPORTS, configureViewport } from '@storybook/addon-viewport'
+
 import Vuetify, { VApp } from 'vuetify/lib'
 import { addDecorator, addParameters, configure } from '@storybook/vue'
 
@@ -71,7 +72,6 @@ addParameters({
   backgrounds: [
     { name: 'Twitter', value: '#00aced' },
     { name: 'Facebook', value: '#3b5998' },
-    { name: 'Golfbreaks', value: '#8CCD30' },
     { name: 'Dark Grey', value: '#4F525D' },
     { name: 'Black', value: '#000' }
   ]
