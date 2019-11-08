@@ -1,0 +1,39 @@
+// module.exports = [
+//   '@storybook/addon-docs/vue/preset',
+//   {
+//     name: '@storybook/preset-scss',
+//     options: {
+//       cssLoaderOptions: {
+//         modules: true
+//       },
+//       sassLoaderOptions: {
+//         implementation: require('sass'),
+//         sassOptions: {
+//           fiber: require('fibers')
+//         }
+//       }
+//     }
+//   }
+// ]
+const path = require('path')
+
+module.exports = [
+  '@storybook/preset-scss',
+  {
+    module: {
+      rules: [
+        {
+          test: /\.(sass|scss)$/,
+          use: [
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                resources: path.resolve(__dirname, '../assets/variables.scss')
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
