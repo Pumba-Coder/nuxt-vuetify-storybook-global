@@ -1,9 +1,10 @@
-import { storiesOf } from '@storybook/vue'
-import { withKnobs, text } from '@storybook/addon-knobs'
-import centered from '@storybook/addon-centered/vue'
-import 'vuetify/dist/vuetify.css'
+import { text, withKnobs } from '@storybook/addon-knobs'
 
 import FilterChip from '../FilterChip.vue'
+import centered from '@storybook/addon-centered/vue'
+import { storiesOf } from '@storybook/vue'
+
+// import 'vuetify/dist/vuetify.css'
 
 const label = 'Example Chip'
 const filterChipStory = storiesOf('Generic | Filter Chip', module)

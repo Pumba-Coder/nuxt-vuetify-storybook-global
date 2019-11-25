@@ -1,98 +1,84 @@
 const path = require('path')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+// const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-module.exports = async ({ config }) => {
-  config.module.rules.push(
-    {
-      test: /\.s(c|a)ss$/,
-      use: [
-        'vue-style-loader',
-        'css-loader',
-        {
-          loader: 'sass-resources-loader',
-          options: {
-            sourceMap: true,
-            resources: ['assets/variables.scss']
-          }
-        },
-        {
-          loader: 'sass-loader',
-          // Requires sass-loader@^8.0.0
-          options: {
-            implementation: require('sass'),
-            sassOptions: {
-              fiber: require('fibers'),
-              indentedSyntax: true // optional
-            }
+// Export a function. Accept the base config as the only param.
+module.exports = async ({ config, mode }) => {
+  // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
+  // You can change the configuration based on that.
+  // 'PRODUCTION' is used when building the static version of storybook.
+
+  // config.plugins.push(new VueLoaderPlugin())
+
+  config.module.rules.push({
+    test: /\.sass$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'sass-loader',
+        // Requires sass-loader@^8.0.0
+        options: {
+          implementation: require('sass'),
+          sassOptions: {
+            fiber: require('fibers'),
+            indentedSyntax: true // optional
+            // data: '@import "@/assets/variables.scss"'
           }
         }
-      ]
-    },
-    {
-      test: /\.vue$/,
-      loader: ['storybook-addon-vue-info/loader', 'vue-loader'],
-      enforce: 'post'
-    }
-  )
-  // config.module.resolve.push({
-  //   alias: {
-  //     '@': path.dirname(path.resolve(__dirname))
-  //   },
-  //   extensions: ['.vue', '.css', '.less', '.scss', '.sass', '.html']
-  // })
+      }
+    ],
+    include: path.resolve(__dirname, '../')
+  })
 
-  config.module.plugins.push([
-    // make sure to include the plugin!
-    new VueLoaderPlugin()
-  ])
+  config.module.rules.push({
+    test: /\.scss$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'sass-loader',
+        // Requires sass-loader@^8.0.0
+        options: {
+          implementation: require('sass'),
+          sassOptions: {
+            fiber: require('fibers'),
+            indentedSyntax: true // optional
+            // data: '@import "@/assets/variables.scss"'
+          }
+        }
+      }
+    ],
+    include: path.resolve(__dirname, '../')
+  })
 
+  config.module.rules.push({
+    test: /\.css$/,
+    sideEffects: true,
+    use: ['style-loader']
+  })
+
+  config.module.rules.push({
+    test: /\.vue$/,
+    use: [
+      {
+        loader: 'vue-loader',
+        options: {}
+      }
+    ],
+
+    include: path.resolve(__dirname, '../')
+  })
+
+  config.module.rules.push({
+    test: /\.css$/,
+    use: [
+      { loader: 'vue-style-loader' },
+      { loader: 'css-loader', options: { sourceMap: true } }
+    ]
+  })
+
+  config.resolve.alias['@'] = path.dirname(path.resolve(__dirname))
+
+  // Return the altered config
   return config
 }
-
-// module.exports = async ({ config }) => {
-//   config.module.rules.push(
-//     {
-//       test: /\.s(c|a)ss$/,
-//       use: [
-//         'vue-style-loader',
-//         'css-loader',
-//         {
-//           loader: 'sass-resources-loader',
-//           options: {
-//             sourceMap: true,
-//             resources: ['assets/variables.scss']
-//           }
-//         },
-//         {
-//           loader: 'sass-loader',
-//           // Requires sass-loader@^8.0.0
-//           options: {
-//             implementation: require('sass'),
-//             sassOptions: {
-//               fiber: require('fibers'),
-//               indentedSyntax: true // optional
-//             }
-//           }
-//         }
-//       ]
-//     },
-//     {
-//       test: /\.vue$/,
-//       loader: ['storybook-addon-vue-info/loader', 'vue-loader'],
-//       enforce: 'post'
-//     }
-//   )
-//   // config.module.resolve.push({
-//   //   alias: {
-//   //     '@': path.dirname(path.resolve(__dirname))
-//   //   },
-//   //   extensions: ['.vue', '.css', '.less', '.scss', '.sass', '.html']
-//   // })
-
-//   // config.module.plugins.push([
-//   //   // make sure to include the plugin!
-//   //   new VueLoaderPlugin()
-//   // ])
-
-//   return config
-// }
