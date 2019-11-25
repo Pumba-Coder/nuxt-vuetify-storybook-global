@@ -1,8 +1,6 @@
 // import centered from '@storybook/addon-centered/vue'
 // // import { INITIAL_VIEWPORTS, configureViewport } from '@storybook/addon-viewport'
 
-import '!style-loader!css-loader!sass-loader!../assets/variables.scss'
-
 import Vuetify, { VApp } from 'vuetify/lib'
 import { addDecorator, addParameters, configure } from '@storybook/vue'
 
