@@ -33,6 +33,7 @@ module.exports = async ({ config, mode }) => {
   config.module.rules.push({
     test: /\.scss$/,
     use: [
+      'vue-style-loader',
       'style-loader',
       'css-loader',
       {
@@ -60,9 +61,18 @@ module.exports = async ({ config, mode }) => {
   config.module.rules.push({
     test: /\.vue$/,
     use: [
+      'vue-loader',
+      'style-loader',
       {
-        loader: 'vue-loader',
-        options: {}
+        loader: 'sass-loader',
+        // Requires sass-loader@^8.0.0
+        options: {
+          implementation: require('sass'),
+          sassOptions: {
+            fiber: require('fibers'),
+            indentedSyntax: true // optional
+          }
+        }
       }
     ],
 
@@ -72,7 +82,7 @@ module.exports = async ({ config, mode }) => {
   config.module.rules.push({
     test: /\.css$/,
     use: [
-      { loader: 'vue-style-loader' },
+      'vue-style-loader',
       { loader: 'css-loader', options: { sourceMap: true } }
     ]
   })
