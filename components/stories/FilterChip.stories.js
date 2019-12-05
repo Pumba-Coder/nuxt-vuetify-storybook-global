@@ -1,7 +1,7 @@
 import { text, withKnobs } from '@storybook/addon-knobs'
 
-import FilterChip from '../FilterChip.vue'
 import centered from '@storybook/addon-centered/vue'
+import filterChip from '../FilterChip.vue'
 import { storiesOf } from '@storybook/vue'
 
 // import 'vuetify/dist/vuetify.css'
@@ -12,9 +12,9 @@ filterChipStory.addDecorator(withKnobs)
 filterChipStory.addDecorator(centered)
 
 filterChipStory.add('As a standard', () => ({
-  components: { FilterChip },
+  components: { filterChip },
   props: {
     label: { type: String, default: text('Label', label) }
   },
-  template: '<FilterChip :label="label" />'
+  template: '<filterChip :label="label" />'
 }))

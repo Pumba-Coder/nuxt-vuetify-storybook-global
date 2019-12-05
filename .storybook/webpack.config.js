@@ -12,6 +12,7 @@ module.exports = async ({ config, mode }) => {
   config.module.rules.push({
     test: /\.sass$/,
     use: [
+      'vue-style-loader',
       'style-loader',
       'css-loader',
       {
