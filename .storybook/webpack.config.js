@@ -44,8 +44,8 @@ module.exports = async ({ config, mode }) => {
           implementation: require('sass'),
           sassOptions: {
             fiber: require('fibers'),
-            indentedSyntax: true // optional
-            // data: '@import "@/assets/variables.scss"'
+            indentedSyntax: true, // optional
+            data: '@import "@/assets/variables.scss"'
           }
         }
       }
