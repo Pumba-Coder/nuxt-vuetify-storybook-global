@@ -54,15 +54,8 @@ module.exports = async ({ config, mode }) => {
   })
 
   config.module.rules.push({
-    test: /\.css$/,
-    sideEffects: true,
-    use: ['style-loader']
-  })
-
-  config.module.rules.push({
     test: /\.vue$/,
     use: [
-      'vue-loader',
       'style-loader',
       {
         loader: 'sass-loader',
@@ -82,8 +75,10 @@ module.exports = async ({ config, mode }) => {
 
   config.module.rules.push({
     test: /\.css$/,
+    sideEffects: true,
     use: [
       'vue-style-loader',
+      'style-loader',
       { loader: 'css-loader', options: { sourceMap: true } }
     ]
   })
